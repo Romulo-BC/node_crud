@@ -1,5 +1,7 @@
 import "reflect-metadata";
-import { DataSource } from "typeorm";
+import { DataSource, createConnection } from "typeorm";
+
+export const CreateConnection = createConnection();
 
 export const AppDataSource = new DataSource({
   type: "postgres", // Tipo do banco de dados
@@ -9,13 +11,8 @@ export const AppDataSource = new DataSource({
   password: "postgres", // Senha
   database: "code_drops_node_crud", // Nome do banco de dados
   synchronize: false, // Sincronizar automaticamente o esquema do banco de dados (para ambiente de desenvolvimento)
-  logging: true, // Habilitar logs do TypeORM 
-  entities: ["src/entities/**/*.ts"], // Caminho para suas entidades
+  logging: true, // Habilitar logs do TypeORM
+  entities: ["./src/entities/*.ts"], // Caminho para suas entidades
   migrations: ["src/migrations/**/*.ts"], // Caminho para suas migrações
   subscribers: ["src/subscribers/**/*.ts"], // Caminho para seus subscribers
-  cli: {
-    entitiesDir: 'src/entities',
-    migrationsDir: 'src/migrations',
-    subscribersDir: 'src/subscribers',
-  },
 });
